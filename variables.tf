@@ -44,7 +44,7 @@ variable "profiles" {
   type = list(object(
     {
       moid        = string
-      object_type = string
+      object_type = optional(string, "server.Profile")
     }
   ))
 }

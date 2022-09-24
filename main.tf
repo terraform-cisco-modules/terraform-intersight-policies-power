@@ -47,15 +47,6 @@ data "intersight_server_profile_template" "templates" {
 # GUI Location: Policies > Create Policy > Power
 #__________________________________________________________________
 
-locals {
-  profiles = {
-    for v in var.profiles : v.name => {
-      name        = v.name
-      object_type = v.object_type != null ? v.object_type : "server.Profile"
-    }
-  }
-}
-
 resource "intersight_power_policy" "power" {
   depends_on = [
     data.intersight_chassis_profile.profiles,

@@ -88,6 +88,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>""
 
 | Name | Version |
 |------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >=1.3.0 |
 | <a name="requirement_intersight"></a> [intersight](#requirement\_intersight) | >=1.0.32 |
 ## Providers
 
@@ -105,7 +106,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>""
 | <a name="input_dynamic_power_rebalancing"></a> [dynamic\_power\_rebalancing](#input\_dynamic\_power\_rebalancing) | Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name for the Policy. | `string` | `"default"` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | Intersight Organization Name to Apply Policy to.  https://intersight.com/an/settings/organizations/. | `string` | `"default"` | no |
-| <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>  * moid - Managed Object Identifier for the Managed Resource.<br>  * object\_type - Object Type to Assign in the Profile Configuration.<br>    - chassis.Profile - For UCS Chassis Profiles.<br>    - server.Profile - For UCS Server Profiles.<br>    - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      moid        = string<br>      object_type = string<br>    }<br>  ))</pre> | `{}` | no |
+| <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>  * moid - Managed Object Identifier for the Managed Resource.<br>  * object\_type - Object Type to Assign in the Profile Configuration.<br>    - chassis.Profile - For UCS Chassis Profiles.<br>    - server.Profile - For UCS Server Profiles.<br>    - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      moid        = string<br>      object_type = optional(string, "server.Profile")<br>    }<br>  ))</pre> | `{}` | no |
 | <a name="input_power_allocation"></a> [power\_allocation](#input\_power\_allocation) | Sets the Allocated Power Budget of the System (in Watts). This field is only supported for Cisco UCS X series Chassis. | `number` | `0` | no |
 | <a name="input_power_priority"></a> [power\_priority](#input\_power\_priority) | Sets the Power Priority of the System. This field is only supported for Cisco UCS X series servers.<br>  * Low - Set the value to Low.<br>  * Medium - Set the value to Medium.<br>  * High - Set the value to High. | `string` | `"Low"` | no |
 | <a name="input_power_profiling"></a> [power\_profiling](#input\_power\_profiling) | Sets the Power Profiling of the Server. This field is only supported for Cisco UCS X series servers.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
