@@ -5,7 +5,12 @@
 #____________________________________________________________
 
 data "intersight_organization_organization" "org_moid" {
-  name = var.organization
+  for_each = {
+    for v in [var.organization] : v => v if length(
+      regexall("[[:xdigit:]]{24}", var.organization)
+    ) == 0
+  }
+  name = each.value
 }
 
 #____________________________________________________________
@@ -15,7 +20,7 @@ data "intersight_organization_organization" "org_moid" {
 #____________________________________________________________
 
 data "intersight_chassis_profile" "profiles" {
-  for_each = { for v in local.profiles : v.name => v if v.object_type == "chassis.Profile" }
+  for_each = { for v in var.profiles : v.name => v if v.object_type == "chassis.Profile" }
   name     = each.value.name
 }
 
@@ -26,7 +31,7 @@ data "intersight_chassis_profile" "profiles" {
 #____________________________________________________________
 
 data "intersight_server_profile" "profiles" {
-  for_each = { for v in local.profiles : v.name => v if v.object_type == "server.Profile" }
+  for_each = { for v in var.profiles : v.name => v if v.object_type == "server.Profile" }
   name     = each.value.name
 }
 
@@ -37,7 +42,7 @@ data "intersight_server_profile" "profiles" {
 #__________________________________________________________________
 
 data "intersight_server_profile_template" "templates" {
-  for_each = { for v in local.profiles : v.name => v if v.object_type == "server.ProfileTemplate" }
+  for_each = { for v in var.profiles : v.name => v if v.object_type == "server.ProfileTemplate" }
   name     = each.value.name
 }
 
@@ -62,11 +67,15 @@ resource "intersight_power_policy" "power" {
   power_save_mode     = each.value.power_save_mode
   redundancy_mode     = each.value.power_redunancy
   organization {
-    moid        = data.intersight_organization_organization.org_moid.results[0].moid
+    moid = length(
+      regexall("[[:xdigit:]]{24}", var.organization)
+      ) > 0 ? var.organization : data.intersight_organization_organization.org_moid[
+      var.organization].results[0
+    ].moid
     object_type = "organization.Organization"
   }
   dynamic "profiles" {
-    for_each = local.profiles
+    for_each = { for v in var.profiles : v.name => v }
     content {
       moid = length(regexall("chassis.Profile", profiles.value.object_type)
         ) > 0 ? data.intersight_chassis_profile.templates[profiles.value.name].results[0
