@@ -61,11 +61,11 @@ resource "intersight_power_policy" "power" {
   allocated_budget    = var.power_allocation
   description         = var.description != "" ? var.description : "${var.name} Power Policy."
   name                = var.name
-  power_priority      = each.value.power_priority
-  power_profiling     = each.value.power_profiling
-  power_restore_state = each.value.power_restore
-  power_save_mode     = each.value.power_save_mode
-  redundancy_mode     = each.value.power_redunancy
+  power_priority      = var.power_priority
+  power_profiling     = var.power_profiling
+  power_restore_state = var.power_restore
+  power_save_mode     = var.power_save_mode
+  redundancy_mode     = var.power_redunancy
   organization {
     moid = length(
       regexall("[[:xdigit:]]{24}", var.organization)
