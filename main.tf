@@ -67,7 +67,7 @@ resource "intersight_power_policy" "power" {
   power_profiling         = var.power_profiling
   power_restore_state     = var.power_restore
   power_save_mode         = var.power_save_mode
-  redundancy_mode         = var.power_redunancy
+  redundancy_mode         = var.power_redundancy
   organization {
     moid = length(
       regexall("[[:xdigit:]]{24}", var.organization)

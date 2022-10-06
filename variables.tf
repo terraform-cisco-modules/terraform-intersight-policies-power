@@ -86,7 +86,7 @@ variable "power_profiling" {
   type        = string
 }
 
-variable "power_redunancy" {
+variable "power_redundancy" {
   default     = "Grid"
   description = <<-EOT
     Sets the Power Redundancy of the System. N+2 mode is only supported for Cisco UCS X series Chassis.
