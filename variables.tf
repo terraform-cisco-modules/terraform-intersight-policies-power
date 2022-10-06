@@ -19,6 +19,16 @@ variable "dynamic_power_rebalancing" {
   type        = string
 }
 
+variable "extended_power_capacity" {
+  default     = "Enabled"
+  description = <<-EOT
+    Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies. This option is only supported for Cisco UCS X series Chassis.
+      * Enabled - Set the value to Enabled.
+      * Disabled - Set the value to Disabled.
+  EOT
+  type        = string
+}
+
 variable "name" {
   default     = "default"
   description = "Name for the Policy."

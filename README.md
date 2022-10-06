@@ -1,9 +1,14 @@
 <!-- BEGIN_TF_DOCS -->
+[![Tests](https://github.com/terraform-cisco-modules/terraform-intersight-policies-power/actions/workflows/terratest.yml/badge.svg)](https://github.com/terraform-cisco-modules/terraform-intersight-policies-power/actions/workflows/terratest.yml)
 # Terraform Intersight Policies - Power
 Manages Intersight Power Policies
 
 Location in GUI:
 `Policies` » `Create Policy` » `Power`
+
+## Easy IMM
+
+[*Easy IMM - Comprehensive Example*](https://github.com/terraform-cisco-modules/easy-imm-comprehensive-example) - A comprehensive example for policies, pools, and profiles.
 
 ## Example
 
@@ -14,7 +19,7 @@ module "power_policy" {
   version = ">= 1.0.1"
 
   description               = "default Power Policy."
-  power_allocation          = "8400"
+  power_allocation          = 8400
   power_priority            = "Low"
   power_profiling           = "Enabled"
   power_redundancy          = "Grid"
@@ -105,6 +110,7 @@ $env:TF_VAR_secretkey="<secret-key-file-location>"
 | <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Intersight Secret Key. | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description for the Policy. | `string` | `""` | no |
 | <a name="input_dynamic_power_rebalancing"></a> [dynamic\_power\_rebalancing](#input\_dynamic\_power\_rebalancing) | Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
+| <a name="input_extended_power_capacity"></a> [extended\_power\_capacity](#input\_extended\_power\_capacity) | Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies. This option is only supported for Cisco UCS X series Chassis.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name for the Policy. | `string` | `"default"` | no |
 | <a name="input_organization"></a> [organization](#input\_organization) | Intersight Organization Name to Apply Policy to.  https://intersight.com/an/settings/organizations/. | `string` | `"default"` | no |
 | <a name="input_profiles"></a> [profiles](#input\_profiles) | List of Profiles to Assign to the Policy.<br>* name - Name of the Profile to Assign.<br>* object\_type - Object Type to Assign in the Profile Configuration.<br>  - chassis.Profile - For UCS Chassis Profiles.<br>  - server.Profile - For UCS Server Profiles.<br>  - server.ProfileTemplate - For UCS Server Profile Templates. | <pre>list(object(<br>    {<br>      name        = string<br>      object_type = optional(string, "server.Profile")<br>    }<br>  ))</pre> | `[]` | no |

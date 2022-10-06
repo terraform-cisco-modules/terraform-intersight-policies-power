@@ -3,7 +3,7 @@ module "power_policy" {
   version = ">= 1.0.1"
 
   description               = "default Power Policy."
-  power_allocation          = "8400"
+  power_allocation          = 8400
   power_priority            = "Low"
   power_profiling           = "Enabled"
   power_redundancy          = "Grid"
