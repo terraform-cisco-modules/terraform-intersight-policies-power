@@ -3,13 +3,13 @@ module "power_policy" {
   version = ">= 1.0.1"
 
   description               = "default Power Policy."
+  dynamic_power_rebalancing = "Enabled"
+  name                      = "default"
+  organization              = "default"
   power_allocation          = 8400
   power_priority            = "Low"
   power_profiling           = "Enabled"
   power_redundancy          = "Grid"
   power_restore             = "LastState"
   power_save_mode           = "Enabled"
-  dynamic_power_rebalancing = "Enabled"
-  name                      = "default"
-  organization              = "default"
 }

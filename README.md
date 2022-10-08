@@ -22,15 +22,15 @@ module "power_policy" {
   version = ">= 1.0.1"
 
   description               = "default Power Policy."
+  dynamic_power_rebalancing = "Enabled"
+  name                      = "default"
+  organization              = "default"
   power_allocation          = 8400
   power_priority            = "Low"
   power_profiling           = "Enabled"
   power_redundancy          = "Grid"
   power_restore             = "LastState"
   power_save_mode           = "Enabled"
-  dynamic_power_rebalancing = "Enabled"
-  name                      = "default"
-  organization              = "default"
 }
 ```
 
@@ -109,9 +109,6 @@ export TF_VAR_secretkeyfile="<secret-key-file-location>"
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_apikey"></a> [apikey](#input\_apikey) | Intersight API Key. | `string` | n/a | yes |
-| <a name="input_endpoint"></a> [endpoint](#input\_endpoint) | Intersight URL. | `string` | `"https://intersight.com"` | no |
-| <a name="input_secretkey"></a> [secretkey](#input\_secretkey) | Intersight Secret Key. | `string` | n/a | yes |
 | <a name="input_description"></a> [description](#input\_description) | Description for the Policy. | `string` | `""` | no |
 | <a name="input_dynamic_power_rebalancing"></a> [dynamic\_power\_rebalancing](#input\_dynamic\_power\_rebalancing) | Sets the Dynamic Power Rebalancing of the System. This option is only supported for Cisco UCS X series Chassis.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
 | <a name="input_extended_power_capacity"></a> [extended\_power\_capacity](#input\_extended\_power\_capacity) | Sets the Extended Power Capacity of the Chassis. If Enabled, this mode allows chassis available power to be increased by borrowing power from redundant power supplies. This option is only supported for Cisco UCS X series Chassis.<br>  * Enabled - Set the value to Enabled.<br>  * Disabled - Set the value to Disabled. | `string` | `"Enabled"` | no |
